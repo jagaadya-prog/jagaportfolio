@@ -16,8 +16,6 @@ function figmaAssetResolver() {
 }
 
 export default defineConfig({
-  base: '/jagaportfolio/', // ✅ ADD THIS LINE
-
   plugins: [
     figmaAssetResolver(),
     react(),
