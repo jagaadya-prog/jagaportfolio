@@ -1,4 +1,5 @@
-import { motion } from "motion/react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import svgPaths from "../imports/Desktop1/svg-c5t4f7i2bq";
 import imgBackgroundWallpaper1 from "../imports/Desktop1/ee6a65d51bdf0d6a91c02a9decfc3ee506a06286.png";
 import imgThumbUp1 from "../imports/Desktop1/ed05eb16b5c28444006b16f68c24555a9f950d0c.png";
@@ -97,7 +98,7 @@ function Frame() {
       whileHover={{ scale: 1.05 }}
       style={{ cursor: 'pointer' }}
     >
-      <Group />
+      <img src="/jaga-icon.png" alt="Jagaportfolio Icon" className="h-[32.676px] w-auto relative shrink-0" />
       <p className="font-['Anybody:Regular',sans-serif] font-normal leading-[normal] relative shrink-0 text-[#acf694] text-[23.766px] whitespace-nowrap" style={{ fontVariationSettings: "'wdth' 100" }}>
         Jaga
       </p>
@@ -246,7 +247,7 @@ function Frame5() {
   );
 }
 
-function Frame4() {
+function Frame4({ onOpenPdf }: { onOpenPdf: () => void }) {
   return (
     <motion.div
       className="h-[486px] relative shrink-0 w-[647px]"
@@ -256,7 +257,7 @@ function Frame4() {
       transition={{ duration: 0.6 }}
       whileHover={{ y: -10, transition: { duration: 0.3 } }}
       style={{ cursor: 'pointer' }}
-      onClick={() => window.open('/MediLink.pdf', '_blank')}
+      onClick={onOpenPdf}
     >
       <div className="absolute h-[486px] left-0 pointer-events-none rounded-[24px] top-0 w-[647px]" data-name="iPhone 16 Pro">
         <img alt="" className="absolute inset-0 max-w-none object-cover rounded-[24px] size-full" src={imgIPhone16Pro} />
@@ -286,10 +287,53 @@ function Frame4() {
   );
 }
 
-function Frame8() {
+function PdfModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onClose}
+        >
+          <motion.div
+            className="relative bg-[#1a1a1a] rounded-2xl w-full max-w-5xl h-[85vh] overflow-hidden border border-[#acf694]/20"
+            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.9, opacity: 0, y: 20 }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="absolute top-4 right-4 z-10">
+              <button
+                onClick={onClose}
+                className="bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition-colors border border-white/10"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+            </div>
+            <div className="w-full h-full">
+              <iframe
+                src="/MediLink.pdf#toolbar=0"
+                className="w-full h-full border-none"
+                title="MediLink PDF"
+              />
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
+function Frame8({ onOpenPdf }: { onOpenPdf: () => void }) {
   return (
     <div className="content-stretch flex items-center justify-between relative shrink-0 w-full">
-      <Frame4 />
+      <Frame4 onOpenPdf={onOpenPdf} />
       <motion.div
         className="h-[486px] relative rounded-[24px] shrink-0 w-[661px]"
         data-name="MacBook #13"
@@ -308,7 +352,7 @@ function Frame8() {
   );
 }
 
-function Frame9() {
+function Frame9({ onOpenPdf }: { onOpenPdf: () => void }) {
   return (
     <div className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0 w-full">
       <motion.p
@@ -322,15 +366,15 @@ function Frame9() {
       >
         Projects
       </motion.p>
-      <Frame8 />
+      <Frame8 onOpenPdf={onOpenPdf} />
     </div>
   );
 }
 
-function Frame10() {
+function Frame10({ onOpenPdf }: { onOpenPdf: () => void }) {
   return (
     <div id="projects-section" className="absolute content-stretch flex flex-col gap-[42px] items-center left-[calc(50%-662px)] top-[830px] w-[1324px]">
-      <Frame9 />
+      <Frame9 onOpenPdf={onOpenPdf} />
       <motion.p
         className="font-['Anybody:Regular',sans-serif] font-normal leading-[normal] opacity-90 relative shrink-0 text-[#020822] text-[24px] text-center w-full"
         style={{ fontVariationSettings: "'wdth' 100", cursor: 'pointer' }}
@@ -346,10 +390,10 @@ function Frame10() {
   );
 }
 
-function Group3() {
+function Group3({ onOpenPdf }: { onOpenPdf: () => void }) {
   return (
     <div className="absolute contents left-[58px] top-[830px]">
-      <Frame10 />
+      <Frame10 onOpenPdf={onOpenPdf} />
       <motion.p
         className="absolute font-['Anybody:Medium',sans-serif] font-medium leading-[normal] left-[calc(50%+41px)] text-[32px] text-white top-[916px] whitespace-nowrap"
         style={{ fontVariationSettings: "'wdth' 100", cursor: 'pointer' }}
@@ -379,6 +423,8 @@ function Group3() {
 }
 
 export default function App() {
+  const [isPdfModalOpen, setIsPdfModalOpen] = useState(false);
+
   return (
     <div className="relative w-full min-h-screen overflow-x-hidden bg-black" style={{ backgroundImage: "url('data:image/svg+xml;utf8,<svg viewBox=\\'0 0 1440 1468\\' xmlns=\\'http://www.w3.org/2000/svg\\' preserveAspectRatio=\\'none\\'><rect x=\\'0\\' y=\\'0\\' height=\\'100%\\' width=\\'100%\\' fill=\\'url(%23grad)\\' opacity=\\'1\\'/><defs><radialGradient id=\\'grad\\' gradientUnits=\\'userSpaceOnUse\\' cx=\\'0\\' cy=\\'0\\' r=\\'10\\' gradientTransform=\\'matrix(-2.3219e-14 -73.4 72 4.7223e-14 720 734)\\'><stop stop-color=\\'rgba(40,167,69,1)\\' offset=\\'0\\'/><stop stop-color=\\'rgba(30,125,52,1)\\' offset=\\'0.25\\'/><stop stop-color=\\'rgba(20,84,35,1)\\' offset=\\'0.5\\'/><stop stop-color=\\'rgba(15,63,26,1)\\' offset=\\'0.625\\'/><stop stop-color=\\'rgba(10,42,17,1)\\' offset=\\'0.75\\'/><stop stop-color=\\'rgba(5,21,9,1)\\' offset=\\'0.875\\'/><stop stop-color=\\'rgba(3,10,4,1)\\' offset=\\'0.9375\\'/><stop stop-color=\\'rgba(0,0,0,1)\\' offset=\\'1\\'/></radialGradient></defs></svg>')" }} data-name="Desktop - 1">
       <Frame6 />
@@ -490,7 +536,8 @@ export default function App() {
         <p className="leading-[21px]">That moment shifted my path. I started exploring UI/UX deeply—learning, experimenting, and growing every day.</p>
       </motion.div>
       <Frame5 />
-      <Group3 />
+      <Group3 onOpenPdf={() => setIsPdfModalOpen(true)} />
+      <PdfModal isOpen={isPdfModalOpen} onClose={() => setIsPdfModalOpen(false)} />
     </div>
   );
 }
