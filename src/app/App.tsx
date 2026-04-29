@@ -91,17 +91,14 @@ function Group() {
 function Frame() {
   return (
     <motion.div
-      className="content-stretch flex gap-[5.941px] items-center relative shrink-0"
+      className="content-stretch flex items-center relative shrink-0"
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.6 }}
       whileHover={{ scale: 1.05 }}
       style={{ cursor: 'pointer' }}
     >
-      <img src="/jaga-icon.png" alt="Jagaportfolio Icon" className="h-[32.676px] w-auto relative shrink-0" />
-      <p className="font-['Anybody:Regular',sans-serif] font-normal leading-[normal] relative shrink-0 text-[#acf694] text-[23.766px] whitespace-nowrap" style={{ fontVariationSettings: "'wdth' 100" }}>
-        Jaga
-      </p>
+      <img src="/logo.png" alt="Jaga Logo" className="h-[32.678px] w-auto relative shrink-0" />
     </motion.div>
   );
 }
@@ -196,7 +193,7 @@ function SkillIconsGmailLight() {
       whileHover={{ scale: 1.2, rotate: 5 }}
       whileTap={{ scale: 0.9 }}
       style={{ cursor: 'pointer' }}
-      onClick={() => window.open('https://mail.google.com/mail/?view=cm&fs=1&to=jagaadya@gmail.com', '_blank')}
+      onClick={() => window.location.href = 'mailto:jagaadya@gmail.com?subject=Regarding%20Opportunity&body=Hello%2C%0A%0AI%20am%20reaching%20out%20to%20you%20regarding...'}
     >
       <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 27.3818 27.3818">
         <g id="Group">
@@ -247,7 +244,7 @@ function Frame5() {
   );
 }
 
-function Frame4({ onOpenPdf }: { onOpenPdf: () => void }) {
+function Frame4({ onOpenPdf }: { onOpenPdf: (url: string, title: string) => void }) {
   return (
     <motion.div
       className="h-[486px] relative shrink-0 w-[647px]"
@@ -257,7 +254,7 @@ function Frame4({ onOpenPdf }: { onOpenPdf: () => void }) {
       transition={{ duration: 0.6 }}
       whileHover={{ y: -10, transition: { duration: 0.3 } }}
       style={{ cursor: 'pointer' }}
-      onClick={onOpenPdf}
+      onClick={() => onOpenPdf("/MediLink.pdf", "MediLink")}
     >
       <div className="absolute h-[486px] left-0 pointer-events-none rounded-[24px] top-0 w-[647px]" data-name="iPhone 16 Pro">
         <img alt="" className="absolute inset-0 max-w-none object-cover rounded-[24px] size-full" src={imgIPhone16Pro} />
@@ -287,7 +284,7 @@ function Frame4({ onOpenPdf }: { onOpenPdf: () => void }) {
   );
 }
 
-function PdfModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+function PdfModal({ isOpen, onClose, pdfUrl, title }: { isOpen: boolean; onClose: () => void; pdfUrl: string; title: string }) {
   return (
     <AnimatePresence>
       {isOpen && (
@@ -318,9 +315,9 @@ function PdfModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void })
             </div>
             <div className="w-full h-full">
               <iframe
-                src="/MediLink.pdf#toolbar=0"
+                src={`${pdfUrl}#toolbar=0`}
                 className="w-full h-full border-none"
-                title="MediLink PDF"
+                title={`${title} PDF`}
               />
             </div>
           </motion.div>
@@ -330,7 +327,7 @@ function PdfModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void })
   );
 }
 
-function Frame8({ onOpenPdf }: { onOpenPdf: () => void }) {
+function Frame8({ onOpenPdf }: { onOpenPdf: (url: string, title: string) => void }) {
   return (
     <div className="content-stretch flex items-center justify-between relative shrink-0 w-full">
       <Frame4 onOpenPdf={onOpenPdf} />
@@ -343,7 +340,7 @@ function Frame8({ onOpenPdf }: { onOpenPdf: () => void }) {
         transition={{ duration: 0.6, delay: 0.2 }}
         whileHover={{ y: -10, transition: { duration: 0.3 } }}
         style={{ cursor: 'pointer' }}
-        onClick={() => window.open('https://drive.google.com/file/d/1Jg8Rp6NrTCFYlLJYwAgETTa7prU8CjCI/view?usp=sharing', '_blank')}
+        onClick={() => onOpenPdf("/Resilience.pdf", "Resilience")}
       >
         <img alt="" className="absolute inset-0 max-w-none object-cover rounded-[24px] size-full pointer-events-none" src={imgMacBook13} />
         <div aria-hidden="true" className="absolute border-[#b2f19d] border-[0.4px] border-solid inset-[-0.2px] rounded-[24.2px] shadow-[3px_4px_214px_-20px_rgba(255,255,255,0.15)] pointer-events-none" />
@@ -352,7 +349,7 @@ function Frame8({ onOpenPdf }: { onOpenPdf: () => void }) {
   );
 }
 
-function Frame9({ onOpenPdf }: { onOpenPdf: () => void }) {
+function Frame9({ onOpenPdf }: { onOpenPdf: (url: string, title: string) => void }) {
   return (
     <div className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0 w-full">
       <motion.p
@@ -371,7 +368,7 @@ function Frame9({ onOpenPdf }: { onOpenPdf: () => void }) {
   );
 }
 
-function Frame10({ onOpenPdf }: { onOpenPdf: () => void }) {
+function Frame10({ onOpenPdf }: { onOpenPdf: (url: string, title: string) => void }) {
   return (
     <div id="projects-section" className="absolute content-stretch flex flex-col gap-[42px] items-center left-[calc(50%-662px)] top-[830px] w-[1324px]">
       <Frame9 onOpenPdf={onOpenPdf} />
@@ -390,7 +387,7 @@ function Frame10({ onOpenPdf }: { onOpenPdf: () => void }) {
   );
 }
 
-function Group3({ onOpenPdf }: { onOpenPdf: () => void }) {
+function Group3({ onOpenPdf }: { onOpenPdf: (url: string, title: string) => void }) {
   return (
     <div className="absolute contents left-[58px] top-[830px]">
       <Frame10 onOpenPdf={onOpenPdf} />
@@ -402,7 +399,7 @@ function Group3({ onOpenPdf }: { onOpenPdf: () => void }) {
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.4 }}
         whileHover={{ scale: 1.05, color: "#acf694" }}
-        onClick={() => window.open('https://drive.google.com/file/d/1Jg8Rp6NrTCFYlLJYwAgETTa7prU8CjCI/view?usp=sharing', '_blank')}
+        onClick={() => onOpenPdf("/Resilience.pdf", "Resilience")}
       >
         Resilience
       </motion.p>
@@ -414,7 +411,7 @@ function Group3({ onOpenPdf }: { onOpenPdf: () => void }) {
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.6 }}
         whileHover={{ scale: 1.03, opacity: 0.8 }}
-        onClick={() => window.open('https://drive.google.com/file/d/1Jg8Rp6NrTCFYlLJYwAgETTa7prU8CjCI/view?usp=sharing', '_blank')}
+        onClick={() => onOpenPdf("/Resilience.pdf", "Resilience")}
       >
         Proactive platform ensuring system reliability and failure prevention
       </motion.p>
@@ -423,7 +420,15 @@ function Group3({ onOpenPdf }: { onOpenPdf: () => void }) {
 }
 
 export default function App() {
-  const [isPdfModalOpen, setIsPdfModalOpen] = useState(false);
+  const [pdfState, setPdfState] = useState({ isOpen: false, pdfUrl: "", title: "" });
+
+  const handleOpenPdf = (pdfUrl: string, title: string) => {
+    setPdfState({ isOpen: true, pdfUrl, title });
+  };
+
+  const handleClosePdf = () => {
+    setPdfState((prev) => ({ ...prev, isOpen: false }));
+  };
 
   return (
     <div className="relative w-full min-h-screen overflow-x-hidden bg-black" style={{ backgroundImage: "url('data:image/svg+xml;utf8,<svg viewBox=\\'0 0 1440 1468\\' xmlns=\\'http://www.w3.org/2000/svg\\' preserveAspectRatio=\\'none\\'><rect x=\\'0\\' y=\\'0\\' height=\\'100%\\' width=\\'100%\\' fill=\\'url(%23grad)\\' opacity=\\'1\\'/><defs><radialGradient id=\\'grad\\' gradientUnits=\\'userSpaceOnUse\\' cx=\\'0\\' cy=\\'0\\' r=\\'10\\' gradientTransform=\\'matrix(-2.3219e-14 -73.4 72 4.7223e-14 720 734)\\'><stop stop-color=\\'rgba(40,167,69,1)\\' offset=\\'0\\'/><stop stop-color=\\'rgba(30,125,52,1)\\' offset=\\'0.25\\'/><stop stop-color=\\'rgba(20,84,35,1)\\' offset=\\'0.5\\'/><stop stop-color=\\'rgba(15,63,26,1)\\' offset=\\'0.625\\'/><stop stop-color=\\'rgba(10,42,17,1)\\' offset=\\'0.75\\'/><stop stop-color=\\'rgba(5,21,9,1)\\' offset=\\'0.875\\'/><stop stop-color=\\'rgba(3,10,4,1)\\' offset=\\'0.9375\\'/><stop stop-color=\\'rgba(0,0,0,1)\\' offset=\\'1\\'/></radialGradient></defs></svg>')" }} data-name="Desktop - 1">
@@ -536,8 +541,13 @@ export default function App() {
         <p className="leading-[21px]">That moment shifted my path. I started exploring UI/UX deeply—learning, experimenting, and growing every day.</p>
       </motion.div>
       <Frame5 />
-      <Group3 onOpenPdf={() => setIsPdfModalOpen(true)} />
-      <PdfModal isOpen={isPdfModalOpen} onClose={() => setIsPdfModalOpen(false)} />
+      <Group3 onOpenPdf={handleOpenPdf} />
+      <PdfModal
+        isOpen={pdfState.isOpen}
+        onClose={handleClosePdf}
+        pdfUrl={pdfState.pdfUrl}
+        title={pdfState.title}
+      />
     </div>
   );
 }
