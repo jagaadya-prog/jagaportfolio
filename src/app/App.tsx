@@ -256,7 +256,7 @@ function Frame4() {
       transition={{ duration: 0.6 }}
       whileHover={{ y: -10, transition: { duration: 0.3 } }}
       style={{ cursor: 'pointer' }}
-      onClick={() => window.open('https://drive.google.com/file/d/1Ot3-a4ImsI_dpBOSVliyzsMPVpoMevrv/preview', '_blank')}
+      onClick={() => window.open('/MediLink.pdf', '_blank')}
     >
       <div className="absolute h-[486px] left-0 pointer-events-none rounded-[24px] top-0 w-[647px]" data-name="iPhone 16 Pro">
         <img alt="" className="absolute inset-0 max-w-none object-cover rounded-[24px] size-full" src={imgIPhone16Pro} />
