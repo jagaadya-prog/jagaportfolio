@@ -162,7 +162,7 @@ function Group1() {
       whileHover={{ scale: 1.1, rotate: -2 }}
       whileTap={{ scale: 0.95 }}
       style={{ cursor: 'pointer' }}
-      onClick={() => window.open("https://drive.google.com/file/d/1o-D1qtZWfYcXGQG6bGoPCjwVRHXt-1Ne/view?usp=sharing", "_blank")}
+      onClick={() => window.open("https://drive.google.com/file/d/1BPQtoPBm4oVRSS3N8jbfY6VMEBOlXV8i/view?usp=sharing", "_blank")}
     >
       <div className="bg-gradient-to-b col-1 from-[#2a9f04] h-[32.678px] ml-0 mt-0 rounded-[32.037px] row-1 to-[#b0f29a] to-[59.564%] w-[102.518px]" />
       <p className="col-1 font-['Inter:Regular',sans-serif] font-normal leading-[normal] ml-[20.83px] mt-[6.13px] not-italic relative row-1 text-[16.018px] text-black w-[61.271px]">Resume</p>
